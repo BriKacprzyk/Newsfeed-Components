@@ -73,9 +73,7 @@ const data = [
   {
     title: 'Professional Software Development in 2019',
     date: 'Jan 1st, 2019',
-    firstParagraph: `Hodor hodor HODOR! Hodor hodor - hodor, hodor. Hodor hodor... Hodor hodor hodor; hodor hodor. Hodor hodor hodor, hodor, hodor
-          hodor. Hodor, hodor. Hodor. Hodor, hodor - hodor... Hodor hodor hodor; hodor HODOR hodor, hodor hodor?! Hodor hodor, hodor.
-          Hodor hodor hodor hodor hodor! Hodor hodor - HODOR hodor, hodor hodor hodor hodor hodor; hodor hodor? `,
+    firstParagraph: `First of all, I have a great love for the nature. I am fed up with artificial and momentary pleasure which we derive in our city life. I am thinking of setting in some village where I will be able to enjoy the nature. I wish to make friends with the nature because it is a true friend and real guide of a man and it never deceives a person who loves it. I am very anxious to go and enjoy steep hills, greenery of open valleys, cool breeze on my face and all other natural objects.`,
 
     secondParagraph: `Hodor, hodor. Hodor. Hodor, hodor, hodor. Hodor hodor, hodor. Hodor hodor, hodor, hodor hodor. Hodor! Hodor hodor, hodor;
           hodor hodor hodor? Hodor, hodor. Hodor. Hodor, hodor - HODOR hodor, hodor hodor hodor! Hodor, hodor. Hodor. Hodor, HODOR
@@ -85,6 +83,15 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+    },
+    {
+    title: 'This Is My New Article',
+    date: 'October 7th, 2019',
+    firstParagraph: `First of all, I have a great love for the nature. I am fed up with artificial and momentary pleasure which we derive in our city life. I am thinking of setting in some village where I will be able to enjoy the nature. I wish to make friends with the nature because it is a true friend and real guide of a man and it never deceives a person who loves it. I am very anxious to go and enjoy steep hills, greenery of open valleys, cool breeze on my face and all other natural objects.`,
+
+    secondParagraph: `Secondly, I am very much interested in adopting teaching as my profession. I am deeply painted to find illiteracy in India. I want every young man and woman of my country to get educated. By adopting teaching, I would be able to serve my country in the best possible way. `,
+
+    thirdParagraph: `Thirdly, I have a keen desire to read novels. Novels are the best pastime as they widen the doors of the knowledge. They give us insight into zig – zag ways of this world. Sometimes we are able to resolve many difficult problems with the help of knowledge obtained from novels. src: http://www.preservearticles.com/short-essays/shot-essay-on-five-things-i-love-most/6290 `
   }
 ];
 
@@ -112,3 +119,53 @@ const data = [
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
 
 */
+const container = document.querySelector('.articles');
+
+data.forEach(data => {
+    container.appendChild(createArticle(data.title, data.date, data.firstParagraph, data.secondParagraph, data.thirdParagraph));
+});
+
+function createArticle(t, d, p1, p2, p3, p4) {
+    const container = document.createElement('div');
+    const title = document.createElement('h2');
+    const date = document.createElement('p');
+    const paragraph1 = document.createElement('p');
+    const paragraph2 = document.createElement('p');
+    const paragraph3 = document.createElement('p');
+    const paragraph4 = document.createElement('p');
+    const expandButton = document.createElement('span');
+
+    //attaching the elements
+    container.appendChild(title);
+    container.appendChild(date);
+    container.appendChild(paragraph1);
+    container.appendChild(paragraph2);
+    container.appendChild(paragraph3);
+    container.appendChild(paragraph4);
+    container.appendChild(expandButton);
+
+    //classes
+    container.classList.add('article');
+    date.classList.add('date');
+    expandButton.classList.add('expandButton');
+
+    //giving it content
+    title.textContent = t;
+    date.textContent = d;
+    paragraph1.textContent = p1;
+    paragraph2.textContent = p2;
+    paragraph3.textContent = p3;
+    paragraph4.textContent = p4;
+    expandButton.textContent = '\u25bc';
+
+    expandButton.addEventListener('click', (e) => {
+        if (container.classList.contains('article-open')) {
+            expandButton.textContent = '\u25bc';
+        } else {
+            expandButton.textContent = '\u25b2';
+        }
+        container.classList.toggle('article-open');
+    });
+
+    return container;
+}
